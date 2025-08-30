@@ -1,0 +1,192 @@
+/* === General Body & Layout === */
+body {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f4f5f7;
+  color: #172b4d;
+  margin: 0;
+  padding: 2rem;
+  /* Added for smoother font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* === Header Section === */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; 
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0;
+  color: #091e42;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  margin: 0.25rem 0 0 0;
+  color: #6b778c;
+}
+
+.add-button {
+  background-color: #0052cc;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  white-space: nowrap; 
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: #0065ff;
+  transform: translateY(-2px);
+}
+
+/* === Search & Filter Section === */
+.search-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap; 
+}
+
+.search-input {
+  flex-grow: 1; 
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #dfe1e6;
+  border-radius: 8px;
+  background-color: #fafbfc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 200px; /* Prevents inputs from becoming too small before wrapping */
+}
+
+.search-input::placeholder {
+  color: #7a869a;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0052cc;
+  box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.2);
+}
+
+/* === School Grid & Cards === */
+.school-grid {
+  display: grid;
+  /* This grid is already responsive! It will automatically adjust columns. */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.school-card {
+  background-color: #ffffff;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(9, 30, 66, 0.08);
+  overflow: hidden; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.school-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(9, 30, 66, 0.15);
+}
+
+.school-image {
+  max-width: 400px;
+  height: 200px;
+  margin: 10px;
+  border-radius: 12px;
+  display: block;
+}
+
+.school-details {
+  padding: 1.25rem;
+  flex-grow: 1; 
+  justify-content: center;
+}
+.school-detailstop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bolder;
+    font-size: smaller;
+    margin: 0 0 0.5rem 0;
+}
+
+.school-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.school-board{
+    display: flex;
+    margin: 0 0 0.5rem 0;
+    
+}
+
+.school-address,
+.school-city {
+  margin: 0.25rem 0;
+  color: #505f79;
+}
+
+.school-city {
+  font-weight: 600;
+  color: #42526e;
+}
+
+/* === Mobile Responsiveness === */
+/* Styles for screens smaller than 768px */
+@media (max-width: 768px) {
+  body {
+    /* Reduce padding on mobile to give content more space */
+    padding: 1rem;
+  }
+
+  .header-section {
+    /* Stack header items vertically */
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left */
+    gap: 1.5rem; /* Increase gap for vertical stacking */
+  }
+
+  .page-title {
+    /* Make the main title slightly smaller on mobile */
+    font-size: 2rem;
+  }
+  
+  .add-button {
+    /* Make the button full-width for an easier tap target */
+    width: 100%;
+    text-align: center;
+  }
+
+  .search-section {
+    /* Stack search inputs vertically */
+    flex-direction: column;
+  }
+  
+  .school-grid {
+    /* Adjust min-width of cards for very small screens if needed */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
