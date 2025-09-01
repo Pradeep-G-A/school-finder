@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import LanguageIcon from '@mui/icons-material/Language';
 import "../show-schools/pageshow.css";
 
 // Mapping of states to their top 5 cities for schools
@@ -70,37 +71,55 @@ export default function ShowSchoolsPage() {
 
   // Get cities for the selected state
   const filteredCities = stateFilter ? stateCityMap[stateFilter] || [] : [];
+const normalizeToArray = (val) => {
+  if (!val) return [];
+  if (Array.isArray(val)) return val.map(v => String(v).trim());
+  // handle comma/pipe/semicolon separated lists or plus signs
+  return String(val)
+    .split(/[,;|+]/)
+    .map(v => v.trim())
+    .filter(Boolean);
+};
 
-  // Apply all filters
-  const filteredSchools = useMemo(() => {
-    return allSchools.filter((school) => {
-      const nameMatches = school.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const boardMatches = boardFilter ? school.board === boardFilter : true;
-      const stateMatches = stateFilter ? school.state === stateFilter : true;
-      const cityMatches = cityFilter ? school.city === cityFilter : true;
-      const typeMatches = typeFilter ? school.type === typeFilter : true;
-      return (
-        nameMatches &&
-        boardMatches &&
-        stateMatches &&
-        cityMatches &&
-        typeMatches
-      );
-    });
-  }, [
-    allSchools,
-    searchTerm,
-    boardFilter,
-    stateFilter,
-    cityFilter,
-    typeFilter,
-  ]);
+const filteredSchools = useMemo(() => {
+  const search = searchTerm.toLowerCase().trim();
+
+  return allSchools.filter((school) => {
+    // name match
+    const nameMatches = !search || (school.name || "").toLowerCase().includes(search);
+
+    // board match (school may have multiple)
+    const schoolBoards = normalizeToArray(school.board || school.boards);
+    const boardMatches = !boardFilter || schoolBoards.some(b => b.toLowerCase() === boardFilter.toLowerCase());
+
+    // state/city exact match (single value fields)
+    const stateMatches = !stateFilter || school.state === stateFilter;
+    const cityMatches = !cityFilter || school.city === cityFilter;
+
+    // type match (support multiple types if present)
+    const schoolTypes = normalizeToArray(school.type || school.types);
+    const typeMatches = !typeFilter || schoolTypes.some(t => t.toLowerCase() === typeFilter.toLowerCase());
+
+    return nameMatches && boardMatches && stateMatches && cityMatches && typeMatches;
+  });
+}, [allSchools, searchTerm, boardFilter, stateFilter, cityFilter, typeFilter]);
 
   const renderContent = () => {
     if (status === "loading")
-      return <div className="school-loading">Loading schools...</div>;
+      return (
+        <div
+          className="dotted-loader"
+          role="status"
+          aria-label="Loading schools"
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <div className="dot"></div>
+          <div className="dot"></div>
+          <div className="dot"></div>
+        </div>
+      );
+
     if (status === "error")
       return <div className="school-error">Error loading schools: {error}</div>;
     if (filteredSchools.length === 0)
@@ -134,7 +153,13 @@ export default function ShowSchoolsPage() {
                 {school.address}
               </p>
               <p className="school-city">{school.city}</p>
-              <p className="school-state">{school.state}</p>
+              <p className="school-state">{school.state}</p> 
+              <div className="school-websection">
+                <LanguageIcon/>
+                <a href={school.website} target="blank" className="school-website" title={school.website}>
+                  {school.website}
+                </a>
+              </div>
             </div>
           </div>
         ))}
@@ -148,11 +173,11 @@ export default function ShowSchoolsPage() {
         <div className="page-search">
           <div className="header-section">
             <div className="header-text">
-              <h1 className="page-title">School Directory</h1>
+              <h1 className="page-title">School Finder</h1>
               <p className="page-subtitle">Find the perfect school for you.</p>
             </div>
             <a href="/add-school" className="add-button">
-              + Add New School
+              + <span className="addscl">Add New School</span>
             </a>
           </div>
 
