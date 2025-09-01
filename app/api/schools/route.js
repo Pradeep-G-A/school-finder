@@ -63,14 +63,14 @@ export async function POST(request) {
       email_id: data.get('email_id'),
       image: publicUrl, // <-- The public URL from Supabase is saved here
       website: data.get('website'),
-      description: data.get('description'),
+      
       type: data.get('type'),
       board: data.get('board'),
     };
 
     // 4. Insert the school data into your TiDB Cloud database
     const result = await query({
-      query: `INSERT INTO schools (name, address, city, state, contact, email_id, image, website, description, type, board) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      query: `INSERT INTO schools (name, address, city, state, contact, email_id, image, website, type, board) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       values: Object.values(schoolData),
     });
 
