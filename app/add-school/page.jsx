@@ -99,20 +99,20 @@ export default function AddSchoolPage() {
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
             <label htmlFor="name">School Name</label>
-            <input id="name" type="text" {...register('name', { required: 'School name is required' })} />
+            <input id="name" type="text" placeholder="Enter school name..." {...register('name', { required: 'School name is required' })} />
             {errors.name && <p className="error-text">{errors.name.message}</p>}
           </div>
 
           <div className="form-group">
             <label htmlFor="address">Address</label>
-            <input id="address" type="text" {...register('address', { required: 'Address is required' })} />
+            <input id="address" type="text" placeholder="Enter address" {...register('address', { required: 'Address is required' })} />
             {errors.address && <p className="error-text">{errors.address.message}</p>}
           </div>
 
           <div className="form-row">
             <div className="form-group half-width">
               <label htmlFor="city">City</label>
-              <input id="city" type="text" {...register('city', { required: 'City is required' })} />
+              <input id="city" type="text" placeholder="Enter city" {...register('city', { required: 'City is required' })} />
               {errors.city && <p className="error-text">{errors.city.message}</p>}
             </div>
             <div className="form-group half-width">
@@ -125,7 +125,7 @@ export default function AddSchoolPage() {
               autoComplete="off"
               value={inputValue}
         onChange={handleChange}
-        placeholder="Type a state..."
+        placeholder="Select a state..."
             />               
             <datalist id="state-list">
               {indianStatesAndUTs.map(state => (
@@ -143,6 +143,7 @@ export default function AddSchoolPage() {
               <input
                 id="email_id"
                 type="email"
+                placeholder="Enter email"
                 {...register('email_id', {
                   required: 'Email is required',
                   pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' },
@@ -152,7 +153,7 @@ export default function AddSchoolPage() {
             </div>
              <div className="form-group half-width">
               <label htmlFor="contact">Contact</label>
-              <input id="contact" type="tel" {...register('contact', { required: 'Contact is required' })} />
+              <input id="contact" type="tel" placeholder="Enter contact number"{...register('contact', { required: 'Contact is required' })} />
               {errors.contact && <p className="error-text">{errors.contact.message}</p>}
             </div>
           </div>
@@ -180,7 +181,7 @@ export default function AddSchoolPage() {
              <div className="form-row">
             <div className="form-group half-width">
               <label htmlFor="website">Website</label>
-              <input id="website" type="text" {...register('website')} />
+              <input id="website" type="text" placeholder="Enter website" {...register('website')} />
               {errors.website && <p className="error-text">{errors.website.message}</p>}
             </div>
 
@@ -190,6 +191,7 @@ export default function AddSchoolPage() {
               id="type" 
               type="text" 
               list="gender-list" 
+              placeholder="Select gender composition"
               {...register('type', { required: 'Gender Composition is required' })}
               autoComplete="off" 
             />
