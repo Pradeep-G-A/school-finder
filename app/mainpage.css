@@ -1,0 +1,65 @@
+#landinghome{
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+}
+
+.heading_landing{
+    font-size: 40px;
+    font-weight: bolder;
+    margin-top: 30px;
+    padding-bottom: 40px;
+}
+
+.content_landing{
+    font-weight: 500;
+    font-size: larger;
+}
+
+.button_landing{
+    display: flex;
+    gap: 30px;
+    padding-top: 40px;
+    
+}
+.button_show{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  width: 170px;
+  height: 50px;
+  background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+  border-radius: 30px;
+  border: 1px solid #8F9092;
+  transition: all 0.2s ease;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #606060;
+  text-shadow: 0 1px #fff;
+  gap: 5px;
+}
+
+
+.button_add{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+  border-radius: 30px;
+  border: 1px solid #8F9092;
+  transition: all 0.2s ease;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #606060;
+  text-shadow: 0 1px #fff;
+  gap: 5px;
+}
+

@@ -46,12 +46,13 @@ export async function POST(request) {
       image: imageUrl,
       website: data.get('website'),
       board: data.get('board'),
+      type: data.get('type'),
     };
 
     const result = await query({
       query: `INSERT INTO schools 
-              (name, address, city, state, contact, email_id, image, website, board) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              (name, address, city, state, contact, email_id, image, website, board,type) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       values: Object.values(schoolData),
     });
 
@@ -65,47 +66,3 @@ export async function POST(request) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 });
   }
 }
-
-// --- NEW FUNCTION TO HANDLE DELETION ---
-export async function DELETE(request) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
-
-    if (!id) {
-      return NextResponse.json({ success: false, error: "School ID is required." }, { status: 400 });
-    }
-
-    // Optional: Delete the associated image from the file system
-    const [schoolToDelete] = await query({
-      query: "SELECT image FROM schools WHERE id = ?",
-      values: [id],
-    });
-
-    if (schoolToDelete && schoolToDelete.image) {
-      const imagePath = path.join(process.cwd(), 'public', schoolToDelete.image);
-      try {
-        await unlink(imagePath); // Deletes the file
-      } catch (fileError) {
-        console.warn(`Could not delete image file: ${imagePath}`, fileError);
-      }
-    }
-
-    // Delete the record from the database
-    const deleteResult = await query({
-      query: "DELETE FROM schools WHERE id = ?",
-      values: [id],
-    });
-
-    if (deleteResult.affectedRows > 0) {
-      return NextResponse.json({ success: true, message: "School deleted successfully." });
-    } else {
-      return NextResponse.json({ success: false, error: "School not found or already deleted." }, { status: 404 });
-    }
-
-  } catch (e) {
-    console.error("API DELETE Error:", e);
-    return NextResponse.json({ success: false, error: e.message }, { status: 500 });
-  }
-}
-

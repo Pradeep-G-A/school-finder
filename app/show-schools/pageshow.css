@@ -1,19 +1,12 @@
-/* === General Body & Layout === */
-body {
-  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f4f5f7;
-  color: #172b4d;
-  margin: 0;
-  padding: 2rem;
-  /* Added for smoother font rendering */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/* === Base Page Container === */
 .page-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 16px 60px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 
 /* === Header Section === */
@@ -21,57 +14,93 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 1rem;
+  top: 0;
+  z-index: 3000;
+  background-color: #ffffff;
+  padding: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .page-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 900;
   margin: 0;
-  color: #091e42;
+  color: #000000;
 }
 
 .page-subtitle {
-  font-size: 1.1rem;
-  margin: 0.25rem 0 0 0;
-  color: #6b778c;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  margin: 0.25rem 0 0;
+  color: #000000;
 }
 
+/* === Page Inner (search bar sticky below header) === */
+.page-search {
+  position: sticky;
+  top: 0px; /* ensures it sticks below header */
+  z-index: 2500;
+  background-color: #ffffff;
+  padding: 0.5rem 0;
+}
+
+/* === Add Button === */
 .add-button {
-  background-color: #0052cc;
-  color: white;
+  background-color: #000000;
+  color: #ffffff;
   text-decoration: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 700;
-  white-space: nowrap; 
+  white-space: nowrap;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .add-button:hover {
-  background-color: #0065ff;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
   transform: translateY(-2px);
+}
+
+/* === Search Toggle Button (JSX uses .search-toggle) === */
+.search-toggle {
+  display: none; /* hidden on desktop */
+  background: #0070f3;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
 }
 
 /* === Search & Filter Section === */
 .search-section {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap; 
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.search-section.open {
+  display: flex;
 }
 
 .search-input {
-  flex-grow: 1; 
+  flex-grow: 1;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 2px solid #dfe1e6;
   border-radius: 8px;
   background-color: #fafbfc;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  min-width: 200px; /* Prevents inputs from becoming too small before wrapping */
+  min-width: 200px;
+  color: #222223;
 }
 
 .search-input::placeholder {
@@ -80,24 +109,23 @@ body {
 
 .search-input:focus {
   outline: none;
-  border-color: #0052cc;
-  box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.2);
+  border-color: #222223;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 /* === School Grid & Cards === */
 .school-grid {
   display: grid;
-  /* This grid is already responsive! It will automatically adjust columns. */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
 .school-card {
-  background-color: #ffffff;
   max-width: 450px;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(9, 30, 66, 0.08);
-  overflow: hidden; 
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -109,42 +137,44 @@ body {
 }
 
 .school-image {
-  max-width: 400px;
+  width: 100%;
   height: 200px;
-  margin: 10px;
-  border-radius: 12px;
-  display: block;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
 }
 
 .school-details {
   padding: 1.25rem;
-  flex-grow: 1; 
-  justify-content: center;
+  flex-grow: 1;
 }
-.school-detailstop{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bolder;
-    font-size: smaller;
-    margin: 0 0 0.5rem 0;
+
+.school-detailstop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
 .school-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #222223;
 }
-.school-board{
-    display: flex;
-    margin: 0 0 0.5rem 0;
-    
+
+.school-board {
+  display: flex;
+  margin-bottom: 0.5rem;
+  color: #222223;
 }
 
 .school-address,
-.school-city {
+.school-city,
+.school-state {
   margin: 0.25rem 0;
   color: #505f79;
 }
@@ -154,39 +184,94 @@ body {
   color: #42526e;
 }
 
-/* === Mobile Responsiveness === */
-/* Styles for screens smaller than 768px */
+/* === Responsive Breakpoints === */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  .page-container {
+    padding: 16px 40px;
+  }
+
+  .school-image {
+    height: 180px;
+  }
+
+  .search-toggle {
+    display: inline-block; /* show toggle button */
+  }
+
+  .search-section {
+    display: none; /* hidden until toggle */
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-section.open {
+    display: flex;
+  }
+
+  .search-input {
+    width: 100%;
+    min-width: unset;
+  }
+  select {
+  max-width: 100%;  /* prevent it from being too wide */
+  width: 100%;      /* match parent container */
+  font-size: 14px;  /* keep consistent text size */
+}
+}
+
+/* Mobile (<= 768px) */
 @media (max-width: 768px) {
-  body {
-    /* Reduce padding on mobile to give content more space */
-    padding: 1rem;
+  .page-container {
+    padding: 16px 20px;
   }
 
   .header-section {
-    /* Stack header items vertically */
     flex-direction: column;
-    align-items: flex-start; /* Align to the left */
-    gap: 1.5rem; /* Increase gap for vertical stacking */
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .page-title {
-    /* Make the main title slightly smaller on mobile */
-    font-size: 2rem;
-  }
-  
   .add-button {
-    /* Make the button full-width for an easier tap target */
     width: 100%;
     text-align: center;
   }
 
-  .search-section {
-    /* Stack search inputs vertically */
-    flex-direction: column;
-  }
-  
   .school-grid {
-    /* Adjust min-width of cards for very small screens if needed */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: 1fr;
+  }
+
+  .school-image {
+    height: 160px;
+  }
+}
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .school-name {
+    font-size: 1.2rem;
+  }
+
+  .school-image {
+    height: 140px;
+  }
+}
+
+/* Desktop (>= 1025px) */
+@media (min-width: 1025px) {
+  .search-section {
+    display: flex !important; /* always visible */
+  }
+  .search-toggle {
+    display: none !important; /* no toggle on desktop */
   }
 }

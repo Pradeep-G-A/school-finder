@@ -1,0 +1,321 @@
+body{
+  width: 100%;
+}
+
+/* Toast Notification Styles */
+.toast-notification {
+  position: fixed; /* Positions the element relative to the viewport */
+  bottom: 20px;    /* 20px from the bottom */
+  right: 20px;     /* 20px from the right */
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: white;    /* White text color as requested */
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;   /* Ensures it appears above other content */
+  animation: fadeIn 0.5s ease; /* Simple fade-in animation */
+}
+
+/* Green background for success messages */
+.toast-notification.success {
+  background-color: #28a745; /* A nice green color */
+}
+
+/* Red background for error messages */
+.toast-notification.error {
+  background-color: #dc3545; /* A standard red color */
+}
+
+/* Keyframe animation for the fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* You can remove or keep your old .message styles */
+.message {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Container covers full screen, centers content */
+.container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: #000;
+}
+
+/* Main content card */
+.content {
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Header area */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.link-button {
+  background-color: #111;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.link-button:hover,
+.link-button:focus {
+  background-color: #000;
+  outline: none;
+}
+
+/* Status message box */
+.message {
+  padding: 1rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}
+.message.success {
+  background-color: #e6f4ea;
+  color: #2f5d3a;
+}
+.message.error {
+  background-color: #fee2e2;
+  color: #9b1c1c;
+}
+
+/* Form styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Each form group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Form rows, splits into two equal columns on medium screens */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .form-row {
+    flex-direction: row;
+  }
+}
+
+/* Half width inputs */
+.half-width {
+  flex: 1 1 50%;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #222;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"],
+input[type="password"] {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border: 2px solid #999;
+  border-radius: 0.375rem;
+  outline-offset: 2px;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #222;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.15);
+}
+input:hover {
+  border-color: #0b6e4f;
+  box-shadow: 0 4px 10px rgba(11, 155, 124, 0.2);
+  transform: translateY(-2px);
+}
+
+
+/* Error text */
+.error-text {
+  color: #b91c1c; /* Tailwind red-700 */
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
+}
+
+/* Submit button */
+.submit-button {
+  background-color: #111;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.submit-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.submit-button:not(:disabled):hover,
+.submit-button:not(:disabled):focus {
+  background-color: #000;
+  outline: none;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 0.25);
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.checkbox-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 12px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+/* Hide default checkbox */
+.checkbox-label input {
+  display: none;
+}
+
+/* Custom checkbox */
+.checkbox-label span {
+  position: relative;
+  padding-left: 28px;
+}
+
+/* Box before text */
+.checkbox-label span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+/* Tick after checked */
+.checkbox-label input:checked + span::after {
+  content: "✔";
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  font-size: 16px;
+  color: white;
+  transform: scale(0);
+  animation: tick-pop 0.3s forwards ease-out;
+}
+
+/* When checked: animated background */
+.checkbox-label input:checked + span::before {
+  background: linear-gradient(135deg, #0b6e4f, #0b6e4f);
+  border-color: transparent;
+  transform: scale(1.2);
+  animation: box-bounce 0.3s ease;
+}
+
+/* Smooth card effect */
+.checkbox-label:hover {
+  border-color: #0b6e4f;
+  box-shadow: 0 4px 10px rgba(79, 172, 254, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes box-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1.1); }
+}
+
+@keyframes tick-pop {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
