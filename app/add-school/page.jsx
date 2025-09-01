@@ -1,6 +1,7 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { useState,useEffect } from 'react';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import '../add-school/pageadd.css';
 
 export default function AddSchoolPage() {
@@ -92,7 +93,7 @@ export default function AddSchoolPage() {
       <div className="content">
         <div className="header">
           <h1>Add New School</h1>
-          <a href="/show-schools" className="link-button">View All Schools</a>
+          <a href="/show-schools" className="link-button"><VisibilityIcon/><span className='linkviewtext'>View All Schools</span></a>
         </div>
 
        
