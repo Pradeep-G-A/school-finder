@@ -6,21 +6,15 @@ import "../show-schools/pageshow.css";
 
 // Mapping of states to their top 5 cities for schools
 const stateCityMap = {
-  "Andhra Pradesh": [
-    "Visakhapatnam",
-    "Vijayawada",
-    "Guntur",
-    "Tirupati",
-    "Kurnool",
-  ],
-  Assam: ["Balipara"],
-  Bihar: ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Purnia"],
-  Delhi: ["New Delhi", "Dwarka", "Rohini", "Saket", "Karol Bagh"],
-  Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar"],
-  Karnataka: ["Bangalore", "Mysore", "Mangalore", "Hubli", "Belgaum"],
-  Kerala: ["Thiruvananthapuram", "Kochi", "Kozhikode", "Kollam", "Palakkad"],
+  "Andhra Pradesh": ["Visakhapatnam","Vijayawada","Guntur","Madanapalle",],
+  Assam: ["Balipara","Guwahati"],
+  "Uttar Pradesh": ["Lucknow", "Kanpur", "Noida", "Agra", "Varanasi"],
+  Bihar: ["Patna"],
+  Gujarat: ["Ahmedabad"],
+  Karnataka: ["Bangalore"],
+  Kerala: ["Thiruvananthapuram", "Kochi", "Kottayam"],
   Maharashtra: ["Mumbai", "Pune", "Nagpur", "Nashik", "Thane"],
-  Punjab: ["Amritsar", "Ludhiana", "Jalandhar", "Patiala", "Bathinda"],
+  Punjab: ["Amritsar", "Ludhiana",  "Patiala"],
   Rajasthan: ["Jaipur", "Udaipur", "Jodhpur", "Kota", "Bikaner"],
   "Tamil Nadu": [
     "Chennai",
@@ -29,12 +23,11 @@ const stateCityMap = {
     "Tiruchirappalli",
     "Salem",
   ],
-  Telangana: ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Khammam"],
-  "Uttar Pradesh": ["Lucknow", "Kanpur", "Noida", "Agra", "Varanasi"],
+  
   "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Siliguri", "Asansol"],
 };
 
-const boards = ["State", "CBSE", "ICSE", "IGCSE", "IB"];
+const boards = ["State", "CBSE", "ICSE", "IGCSE","ISC", "IB"];
 
 const type = ["Boys school", "Girls school", "Coeducation"];
 
