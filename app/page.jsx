@@ -32,53 +32,55 @@ export default function LandingPage() {
   // Helper function to create book page positions for flipping animation
   const createBookPagePositions = (flipProgress = 0) => {
     const positions = [];
-    const pageCount = 40; // Number of pages
+    // --- MODIFICATION START: Increased particle density for the book ---
+    const pageCount = 50; // More pages
     const pageWidth = 12;
     const pageHeight = 16;
     const pageThickness = 0.15;
-    const pointsPerPage = 250; // Points to represent each page
-    
+    const pointsPerPage = 550; // More points per page for a denser look
+    // --- MODIFICATION END ---
+
     for (let i = 0; i < pageCount; i++) {
       const pageProgress = i / pageCount;
       const isFlipping = pageProgress < flipProgress;
-      
+
       for (let j = 0; j < pointsPerPage; j++) {
         let x, y, z;
-        
+
         if (isFlipping) {
           // Page has been flipped (left side)
           const u = Math.random();
           const v = Math.random();
-          
+
           // Create a curved flip animation
           const flipAngle = Math.PI * (1 - (flipProgress - pageProgress) / flipProgress);
           const curveFactor = Math.sin(flipAngle * 0.5) * 3;
-          
+
           x = -pageWidth / 2 + (Math.random() - 0.5) * pageWidth * 0.9;
           y = (v - 0.5) * pageHeight;
           z = -i * pageThickness - Math.random() * pageThickness + curveFactor;
-          
+
         } else {
           // Page hasn't been flipped yet (right side)
           const u = Math.random();
           const v = Math.random();
-          
+
           // Check if this is the currently flipping page
           const isCurrentPage = Math.abs(pageProgress - flipProgress) < 0.05;
-          
+
           if (isCurrentPage && flipProgress > 0 && flipProgress < 1) {
             // This page is currently flipping - create curved motion
             const localFlipProgress = (flipProgress - pageProgress + 0.05) / 0.1;
             const flipAngle = localFlipProgress * Math.PI;
-            
+
             // Create a page curl effect
             const curlAmount = Math.sin(flipAngle) * 0.5;
             const baseX = pageWidth / 2 * (1 - localFlipProgress * 2);
-            
+
             x = baseX + (Math.random() - 0.5) * pageWidth * 0.9 * Math.cos(flipAngle);
             y = (v - 0.5) * pageHeight;
             z = i * pageThickness + Math.sin(flipAngle) * 4 + (Math.random() - 0.5) * curlAmount;
-            
+
             // Add some curl to the edge of the page
             if (u > 0.7) {
               z += Math.sin(v * Math.PI) * curlAmount * 2;
@@ -90,19 +92,21 @@ export default function LandingPage() {
             z = i * pageThickness + Math.random() * pageThickness;
           }
         }
-        
+
         positions.push(x, y, z);
       }
     }
-    
+
+    // --- MODIFICATION START: Increased spine particle count to match page density ---
     // Add spine particles
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 800; i++) {
       const y = (Math.random() - 0.5) * pageHeight;
       const x = (Math.random() - 0.5) * 2;
       const z = (Math.random() - 0.5) * pageCount * pageThickness;
       positions.push(x, y, z);
     }
-    
+    // --- MODIFICATION END ---
+
     return new Float32Array(positions);
   };
 
@@ -199,9 +203,9 @@ export default function LandingPage() {
         vec3 x3 = x0 - D.yyy;
         i = mod289(i);
         vec4 p = permute(permute(permute(
-                  i.z + vec4(0.0, i1.z, i2.z, 1.0))
-                + i.y + vec4(0.0, i1.y, i2.y, 1.0))
-                + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+                   i.z + vec4(0.0, i1.z, i2.z, 1.0))
+                 + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+                 + i.x + vec4(0.0, i1.x, i2.x, 1.0));
         float n_ = 0.142857142857;
         vec3 ns = n_ * D.wyz - D.xzx;
         vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
@@ -312,7 +316,7 @@ export default function LandingPage() {
 
     const updateTargetPositions = () => {
       const targetPositions = new Float32Array(NUM_PARTICLES * 3);
-      
+
       if (currentShape === 0) {
         // Globe
         const sourcePositions = globe.attributes.position;
@@ -341,7 +345,7 @@ export default function LandingPage() {
           targetPositions[i * 3 + 2] = sourcePositions.getZ(index);
         }
       }
-      
+
       particlesGeometry.setAttribute(
         "targetPosition",
         new THREE.BufferAttribute(targetPositions, 3)
@@ -363,7 +367,7 @@ export default function LandingPage() {
     // --- Render Loop ---
     const clock = new THREE.Clock();
     let lastBookUpdateTime = 0;
-    
+
     const animate = () => {
       const elapsedTime = clock.getElapsedTime();
 
@@ -375,7 +379,7 @@ export default function LandingPage() {
         currentShape = (currentShape + 1) % 3; // Changed to 3 shapes
         updateTargetPositions();
         transitionStartTime = elapsedTime;
-        
+
         // Reset book flip when transitioning away from book
         if (currentShape !== 1) {
           bookFlipProgress = 0;
@@ -390,7 +394,7 @@ export default function LandingPage() {
       if (currentShape === 1 && progress > 0.9) {
         // Update book flip animation
         bookFlipProgress += bookFlipDirection * 0.008; // Adjust speed here
-        
+
         if (bookFlipProgress >= 1) {
           bookFlipProgress = 1;
           bookFlipDirection = -1;
@@ -398,9 +402,9 @@ export default function LandingPage() {
           bookFlipProgress = 0;
           bookFlipDirection = 1;
         }
-        
+
         uniforms.u_bookFlipProgress.value = bookFlipProgress;
-        
+
         // Update book positions continuously during flip
         if (elapsedTime - lastBookUpdateTime > 0.016) { // ~60fps update
           updateTargetPositions();
@@ -414,17 +418,28 @@ export default function LandingPage() {
       const distance = -camera.position.z / dir.z;
       const pos = camera.position.clone().add(dir.multiplyScalar(distance));
       uniforms.u_mouse.value.lerp(pos, 0.1);
-
-      // Different rotation speeds for different shapes
+      
+      // --- MODIFICATION START: Added specific infinity animation for the Torus ---
+      // Different rotation for different shapes
       if (currentShape === 1) {
-        // Book - gentle rotation
+        // Book - gentle sway
         particles.rotation.y = Math.sin(elapsedTime * 0.2) * 0.15;
         particles.rotation.x = Math.sin(elapsedTime * 0.15) * 0.05;
-      } else {
-        // Globe and Torus - normal rotation
+        particles.rotation.z = 0; // Reset z-rotation
+      } else if (currentShape === 2) {
+        // Torus - infinity (figure-eight) animation
+        const speed = 0.4;
+        particles.rotation.y = Math.sin(elapsedTime * speed) * Math.PI * 0.2;
+        particles.rotation.x = Math.cos(elapsedTime * speed) * Math.PI * 0.15;
+        particles.rotation.z = Math.sin(elapsedTime * speed) * Math.PI * 0.1;
+      }
+      else {
+        // Globe - normal rotation
         particles.rotation.y = elapsedTime * 0.05;
         particles.rotation.x = elapsedTime * 0.02;
+        particles.rotation.z = 0; // Reset z-rotation
       }
+      // --- MODIFICATION END ---
 
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
