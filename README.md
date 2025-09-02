@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+📚 School Finder
 
-## Getting Started
+A full-stack web application that helps users discover schools with ease. Built with a modern, production-ready tech stack, featuring responsive UI, interactive animations, and scalable backend architecture.
 
-First, run the development server:
+🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Dynamic Landing Page – Engaging homepage with 3D interactive animation powered by Three.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+CRUD Operations – Add and view school listings seamlessly
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Robust Backend – Powered by Next.js API Routes as serverless functions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Scalable Cloud Database – TiDB Cloud (MySQL-compatible) for school data management
 
-## Learn More
+Cloud File Storage – Secure image uploads using Supabase Storage
 
-To learn more about Next.js, take a look at the following resources:
+Interactive Frontend – Dynamic search, filtering, and multi-select checkboxes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Responsive Design – Optimized for all devices (mobile, tablet, desktop)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🛠️ Tech Stack
 
-## Deploy on Vercel
+Frontend: React, Next.js, Tailwind CSS, Three.js
+Backend: Next.js API Routes
+Database: TiDB Cloud (MySQL-compatible)
+File Storage: Supabase Storage
+Hosting: Netlify
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🔮 Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add authentication (login/signup)
+
+Implement "Update" and "Delete" features for schools
+
+Enhance UI with advanced animations
